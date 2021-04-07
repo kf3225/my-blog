@@ -24,13 +24,11 @@ const BlogHeader: FC<Props> = (props: Props) => {
         {/* <link rel="shortcut icon" href={'https://t-cr.jp/favicon.ico'} /> */}
         {/* <link rel="apple-touch-icon" href={'https://t-cr.jp/logo.png'} /> */}
       </Head>
-      <div className="p-4">
+      <div className="flex items-center justify-between flex-col bg-gray-200">
         <Link href="/">
-          <a className="font-mono text-3xl">{props.title}</a>
+          <a className="font-mono text-3xl p-8">{props.title}</a>
         </Link>
-      </div>
-      <div className="p-4">
-        <p className="text-mono">{props.description}</p>
+        <p className="text-mono text-center p-8">{props.description}</p>
       </div>
     </>
   )
