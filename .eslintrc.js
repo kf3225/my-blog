@@ -1,5 +1,10 @@
 module.exports = {
-  ignorePatterns: ['!.eslintrc.js', '!.prettierrc.js'],
+  ignorePatterns: [
+    '!.eslintrc.js',
+    '!.prettierrc.js',
+    '!tailwind.config.js',
+    '!postcss.config.js',
+  ],
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
