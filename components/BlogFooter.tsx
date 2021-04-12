@@ -7,7 +7,7 @@ interface Props {
 const BlogFooter: FC<Props> = (props: Props) => {
   return (
     <>
-      <footer className="bg-gray-200">
+      <footer className="">
         <p className="p-8 text-center text-xs">
           Copyright © {props.year} FKeisuke, inc. All Rights Reserved.
         </p>
