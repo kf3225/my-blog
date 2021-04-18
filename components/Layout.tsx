@@ -9,8 +9,9 @@ interface LayoutProps {
   children?: React.ReactNode
 }
 
-const Layout: NextPage = (props: LayoutProps) => {
+const Layout: NextPage<LayoutProps> = ({ children }: LayoutProps) => {
   const year = new Date().getFullYear()
+
   return (
     <div className="min-h-screen flex flex-col container mx-auto">
       <BlogHeader
@@ -20,11 +21,7 @@ const Layout: NextPage = (props: LayoutProps) => {
         twitterLink={TWITTER}
       />
       <div className="flex-grow p-8 text-2xl">
-        {props ? (
-          <main className="markdown-body col-span-5">{props.children}</main>
-        ) : (
-          <div></div>
-        )}
+        <main className="markdown-body col-span-5">{children}</main>
       </div>
 
       <BlogFooter year={year.toString()} />

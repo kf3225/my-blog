@@ -1,27 +1,18 @@
-import fs from 'fs'
 import { join, parse } from 'path'
-import {
-  GetStaticPaths,
-  GetStaticProps,
-  NextPage,
-  InferGetStaticPropsType,
-} from 'next'
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { ParsedUrlQuery } from 'querystring'
-import readMarkdown, { PostContent } from '../../utils/readMarkDown'
 import ReactMarkdown from 'react-markdown'
 import gfm from 'remark-gfm'
 import Layout from '../../components/Layout'
+import getAllPosts from '../../utils/getAllPosts'
+import readMarkdown, { PostContent } from '../../utils/readMarkDown'
 
 const MARKDOWN_DIR = join(process.cwd(), 'posts')
-const getAllPosts = (): string[] =>
-  fs
-    .readdirSync(MARKDOWN_DIR)
-    .filter((file) => /.*\.md$/.test(file))
-    .map((file) => join('/posts', parse(file).name))
+const allPosts = getAllPosts()
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const staticPaths = {
-    paths: getAllPosts().map((post) => {
+    paths: allPosts.map((post) => {
       return {
         params: {
           slug: parse(post).name,
@@ -47,7 +38,7 @@ export const getStaticProps: GetStaticProps<PostProps, Params> = async (
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const params = context.params!
   const filepath =
-    getAllPosts()
+    allPosts
       .map((post) => join(MARKDOWN_DIR, `${parse(post).name}.md`))
       .find((post) => params.slug === parse(post).name) || ''
 
@@ -59,9 +50,7 @@ export const getStaticProps: GetStaticProps<PostProps, Params> = async (
   }
 }
 
-type Props = InferGetStaticPropsType<typeof getStaticProps>
-
-const Posts: NextPage<Props> = ({ post }) => {
+const Posts: NextPage<PostProps> = ({ post }) => {
   return (
     <>
       <Layout>

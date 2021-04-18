@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@types/marked": "^2.0.1",
+    "fs": "^0.0.1-security",
     "github-markdown-css": "^4.0.0",
     "gray-matter": "^4.0.2",
     "marked": "^2.0.1",
